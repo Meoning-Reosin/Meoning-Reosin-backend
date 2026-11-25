@@ -11,3 +11,10 @@ python -m uvicorn app.main:app --reload --port 8000
 
 - 서버 상태 확인은 http://127.0.0.1:8000/health 에서 합니다. `{"status":"ok"}`가 나오면 성공입니다.
 - API 문서는 http://127.0.0.1:8000/docs 에서 확인할 수 있습니다.
+
+## 테스트
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest
+```
