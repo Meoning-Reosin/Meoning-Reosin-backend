@@ -33,6 +33,7 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 - `GET /api/v1/places/1/operating-info`, `/script`: 운영 정보, 해설 대본
 - `GET /api/v1/categories`, `GET /api/v1/courses`, `GET /api/v1/courses/1`: 카테고리, 추천 코스
 - 찜(로그인 필요): Google 로그인을 마친 같은 브라우저에서 `POST /api/v1/bookmarks` (`{"place_id": 2}`), `GET /api/v1/bookmarks`, `DELETE /api/v1/bookmarks/2`. 찜하면 관광지 목록의 `bookmark_count`가 바로 바뀝니다
+- 여행 일정(로그인 필요): `POST /api/v1/itineraries` (`{"title": "정동 산책"}`)로 만들고, `POST /api/v1/itineraries/courses` (`{"course_id": 1, "itinerary_id": 1}`)로 코스를 한 번에 담은 뒤 `GET /api/v1/itineraries/1`로 순서·도보 시간·총 소요 시간을 봅니다
 
 ## 폴더 구조
 
@@ -64,8 +65,8 @@ app/
   places/          관광지·카테고리·추천 코스 (data/places.json은 임시 데이터)
   bookmarks/       찜 (지금은 메모리 저장, 서버를 다시 켜면 사라짐)
   recognitions/    사진 인식 (client.py에 Azure AI Vision을 연결할 예정)
-  itineraries/     여행 일정 (예정)
-tests/             기능별 폴더 (auth/, places/, bookmarks/, recognitions/)
+  itineraries/     여행 일정: 만들기·담기·순서·방문 체크·코스 담기 (지금은 메모리 저장)
+tests/             기능별 폴더 (auth/, places/, bookmarks/, itineraries/, recognitions/)
 ```
 
 오류를 낼 때는 `raise AppError("PLACE_NOT_FOUND")`처럼 코드만 던집니다. 응답 모양 `{"detail": {"code", "message"}}`과 언어는 `core/errors.py`가 맞춰 줍니다. 새 오류 코드는 그 기능의 `errors.py`에 추가합니다.
