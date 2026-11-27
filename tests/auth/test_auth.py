@@ -360,6 +360,22 @@ def test_refresh_without_cookie_returns_401(env):
     assert response.json()["detail"]["code"] == "REFRESH_TOKEN_INVALID"
 
 
+def test_failed_refresh_keeps_signup_cookie(env):
+    """가입 화면에서 일어나는 순서 그대로: 콜백 → 프론트의 로그인 확인(/users/me 401 → refresh 401) → 가입.
+
+    refresh 가 실패해도 가입 쿠키가 남아 있어야 가입을 마칠 수 있다 (예전에는 같이 지워져서 항상 실패했다).
+    """
+    state = start_login(env.client)
+    env.client.get(CALLBACK, params={"code": "abc", "state": state})
+    assert env.client.get("/api/v1/users/me").status_code == 401
+    assert env.client.post("/api/v1/auth/refresh").status_code == 401
+
+    assert SIGNUP_COOKIE in env.client.cookies
+    response = env.client.post("/api/v1/auth/oauth/signup", json=SIGNUP_BODY)
+    assert response.status_code == 201
+    assert ACCESS_COOKIE in env.client.cookies
+
+
 def test_logout_revokes_refresh_and_clears_cookies(env):
     login_new_user(env.client)
     refresh_token = env.client.cookies.get(REFRESH_COOKIE)

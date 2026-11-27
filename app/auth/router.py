@@ -39,6 +39,7 @@ from app.core.security import (
     SIGNUP_COOKIE,
     STATE_COOKIE,
     clear_auth_cookies,
+    clear_login_cookies,
     clear_signup_cookie,
     clear_state_cookie,
     set_access_cookie,
@@ -175,8 +176,9 @@ def refresh(
         tokens = service.refresh(refresh_cookie)
     except AppError as error:
         # 쓸 수 없는 리프레시 토큰이면 남은 로그인 쿠키도 지워서, 프론트가 로그인 화면으로 가게 한다.
+        # 가입 쿠키는 지우지 않는다: 가입 화면에서도 프론트가 로그인 확인 → refresh 를 부르기 때문이다.
         response = error_response(error, lang)
-        clear_auth_cookies(response, settings)
+        clear_login_cookies(response, settings)
         return response
     body = RefreshResponse(expires_in=settings.access_token_minutes * 60)
     response = JSONResponse(body.model_dump())
