@@ -1,25 +1,16 @@
-from dataclasses import dataclass
+"""사진 인식 업무 규칙 (service 층).
 
-from app.recognitions import config
+client가 돌려준 예측의 확신도가 기준(CONFIDENCE_THRESHOLD) 이상이면 "인식 성공",
+아니면 "인식 실패"로 판단한다. 실패해도 오류가 아니라 200 응답이다 (명세서 3번).
+TODO: 인식 기록(recognition_logs) 저장, 실패 시 후보(candidates) 3곳.
+"""
+
+from app.recognitions import client, config
 from app.recognitions.schemas import RecognitionResponse, RecognitionStatus
 
 
-@dataclass
-class Prediction:
-    place_id: int
-    confidence: float
-
-
-def predict(image: bytes, lat: float | None = None, lng: float | None = None) -> Prediction:
-    """이미지에서 장소를 예측한다. 위치가 있으면 주변 장소로 후보를 좁히는 데 쓴다.
-
-    TODO: 실제 AI 모델 연동. 지금은 고정된 결과를 돌려주는 임시 구현.
-    """
-    return Prediction(place_id=1, confidence=0.9)
-
-
 def recognize(image: bytes, lat: float | None = None, lng: float | None = None) -> RecognitionResponse:
-    prediction = predict(image, lat, lng)
+    prediction = client.predict(image, lat, lng)
     if prediction.confidence < config.CONFIDENCE_THRESHOLD:
         return RecognitionResponse(
             status=RecognitionStatus.NOT_MATCHED,

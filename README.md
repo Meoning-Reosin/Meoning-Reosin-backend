@@ -24,20 +24,49 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 회원 정보는 아직 DB가 없어 메모리에만 저장됩니다. 서버를 다시 켜면 사라집니다.
 
+## 관광지 API 확인
+
+서버를 켜고 http://127.0.0.1:8000/docs 에서 아래를 실행해 봅니다. 데이터는 `app/places/data/places.json`의 임시 데이터(A/B 코스 10곳)입니다.
+
+- `GET /api/v1/places`: 관광지 목록. `lat`, `lng`를 보내면 가까운 순, `q=환구`로 검색
+- `GET /api/v1/places/1`: 장소 상세. 헤더 `Accept-Language: en`이면 영어
+- `GET /api/v1/places/1/operating-info`, `/script`: 운영 정보, 해설 대본
+- `GET /api/v1/categories`, `GET /api/v1/courses`, `GET /api/v1/courses/1`: 카테고리, 추천 코스
+
 ## 폴더 구조
+
+기능별 폴더(auth, places …) 안을 다시 층(layer)으로 나눕니다. 요청은 위에서 아래로 내려갑니다.
+
+```
+요청 → router.py → service.py → repository.py / client.py → 데이터(JSON·DB) / 외부 API
+```
+
+| 파일 | 하는 일 | 하지 않는 일 |
+|---|---|---|
+| `router.py` | 주소, 입력 검사, 쿠키·리디렉션 | 판단(업무 규칙) |
+| `schemas.py` | 요청·응답 모양 | |
+| `service.py` | 업무 규칙: 가입 조건, 정렬, 거리·시간 계산 | HTTP, SQL |
+| `repository.py` | 데이터 읽기·쓰기. DB를 붙일 때 이 파일만 바꿈 | 업무 규칙 |
+| `client.py` / `google.py` | 외부 API 호출 (Azure, Google, TourAPI …) | 업무 규칙 |
+| `errors.py` | 그 기능의 오류 코드와 한·영 메시지 | |
 
 ```
 app/
-  main.py          앱 시작점. 라우터 등록, CORS
-  core/            여러 기능이 함께 쓰는 것: 설정(config), JWT·쿠키(security)
+  main.py          앱 시작점: 공통 오류 처리, CORS, 라우터 등록
+  core/            모든 기능이 함께 쓰는 것
+    config.py        설정 (.env)
+    security.py      JWT·쿠키
+    deps.py          로그인 확인: CurrentUser(필수), OptionalUser(선택)
+    errors.py        AppError, 오류 응답 모양, Accept-Language 고르기
+    geo.py           거리·도보 시간 계산
   auth/            회원: Google 로그인, 가입, 토큰, 내 정보, 탈퇴
-  recognitions/    사진 인식
-  places/          관광지 (예정)
+  places/          관광지·카테고리·추천 코스 (data/places.json은 임시 데이터)
+  recognitions/    사진 인식 (client.py에 Azure AI Vision을 연결할 예정)
   itineraries/     여행 일정 (예정)
-tests/             pytest 테스트
+tests/             기능별 폴더 (auth/, places/, recognitions/)
 ```
 
-기능 폴더마다 `router.py`(주소), `schemas.py`(요청·응답 모양), `service.py` 또는 기능별 파일(실제 처리)이 있습니다.
+오류를 낼 때는 `raise AppError("PLACE_NOT_FOUND")`처럼 코드만 던집니다. 응답 모양 `{"detail": {"code", "message"}}`과 언어는 `core/errors.py`가 맞춰 줍니다. 새 오류 코드는 그 기능의 `errors.py`에 추가합니다.
 
 ## 테스트
 

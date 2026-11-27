@@ -1,15 +1,12 @@
 """사진 인식 오류 코드와 언어별 메시지.
 
-응답 형식: {"detail": {"code": "IMAGE_TOO_LARGE", "message": "..."}}
-프론트엔드는 code로 분기하고, message는 그대로 보여줘도 된다.
+쓰는 법: raise AppError("코드"). 응답 모양과 언어 고르기는 app/core/errors.py가 맡는다.
 """
 
-from fastapi import HTTPException, status
+from fastapi import status
 
+from app.core.errors import register_errors
 from app.recognitions import config
-
-SUPPORTED_LANGUAGES = ("ko", "en")
-DEFAULT_LANGUAGE = "ko"
 
 _ERRORS = {
     "EMPTY_FILE": (
@@ -30,25 +27,6 @@ _ERRORS = {
             "en": "Unsupported image type. (jpeg, png, webp, heic)",
         },
     ),
-    "INVALID_LOCATION": (
-        status.HTTP_422_UNPROCESSABLE_CONTENT,
-        {
-            "ko": "위치는 위도와 경도를 함께 보내야 합니다.",
-            "en": "Latitude and longitude must be sent together.",
-        },
-    ),
 }
 
-
-def resolve_language(accept_language: str | None) -> str:
-    """Accept-Language 헤더의 첫 번째 언어를 고른다. 지원하지 않으면 기본값(ko)."""
-    if not accept_language:
-        return DEFAULT_LANGUAGE
-    first = accept_language.split(",")[0].strip().lower()
-    lang = first.split("-")[0].split(";")[0]
-    return lang if lang in SUPPORTED_LANGUAGES else DEFAULT_LANGUAGE
-
-
-def recognition_error(code: str, lang: str) -> HTTPException:
-    status_code, messages = _ERRORS[code]
-    return HTTPException(status_code=status_code, detail={"code": code, "message": messages[lang]})
+register_errors(_ERRORS)

@@ -14,9 +14,14 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from fastapi.testclient import TestClient
 
 from app.auth import google as google_module
-from app.auth.deps import get_google_client
-from app.auth.google import GoogleAuthError, GoogleEmailNotVerified, GoogleOAuthClient, GoogleProfile
-from app.auth.store import UserStore, get_user_store
+from app.auth.google import (
+    GoogleAuthError,
+    GoogleEmailNotVerified,
+    GoogleOAuthClient,
+    GoogleProfile,
+    get_google_client,
+)
+from app.auth.repository import UserRepository, get_user_repository
 from app.core.config import Settings, get_settings
 from app.core.security import ACCESS_COOKIE, REFRESH_COOKIE, SIGNUP_COOKIE, STATE_COOKIE
 from app.main import app
@@ -65,10 +70,10 @@ def make_settings(**overrides) -> Settings:
 def env():
     """테스트용 설정·저장소·가짜 Google을 끼운 클라이언트."""
     settings = make_settings()
-    store = UserStore()
+    store = UserRepository()
     fake = FakeGoogle(settings)
     app.dependency_overrides[get_settings] = lambda: settings
-    app.dependency_overrides[get_user_store] = lambda: store
+    app.dependency_overrides[get_user_repository] = lambda: store
     app.dependency_overrides[get_google_client] = lambda: fake
     client = TestClient(app, follow_redirects=False)
     yield SimpleNamespace(client=client, settings=settings, store=store, google=fake)
