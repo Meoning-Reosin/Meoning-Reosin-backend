@@ -1,0 +1,314 @@
+{
+  "_note": "임시 데이터 (Q-26). 기획이 조사한 값, 오디 대본, TourAPI 운영 정보, 사진이 오면 바꾼다. 좌표·운영 시간은 대략값이다.",
+  "categories": [
+    {"id": 1, "group": "history", "name": {"ko": "조선", "en": "Joseon"}, "description": {"ko": "조선 왕조와 이어지는 장소", "en": "Places tied to the Joseon dynasty"}},
+    {"id": 2, "group": "history", "name": {"ko": "개화기", "en": "Enlightenment era"}, "description": {"ko": "1880~1890년대 근대 문물이 들어오던 때", "en": "When modern ideas arrived in the 1880s-1890s"}},
+    {"id": 3, "group": "history", "name": {"ko": "대한제국", "en": "Korean Empire"}, "description": {"ko": "1897~1910년 대한제국 시기", "en": "The Korean Empire, 1897-1910"}},
+    {"id": 4, "group": "history", "name": {"ko": "독립운동", "en": "Independence movement"}, "description": {"ko": "나라를 되찾으려 한 사람들의 장소", "en": "Places of the fight for independence"}},
+    {"id": 5, "group": "history", "name": {"ko": "근대 건축", "en": "Modern architecture"}, "description": {"ko": "근대에 지은 서양식 건물", "en": "Western-style buildings of the modern era"}},
+    {"id": 6, "group": "history", "name": {"ko": "종교", "en": "Religion"}, "description": {"ko": "선교와 종교 활동이 있던 곳", "en": "Places of missions and faith"}},
+    {"id": 7, "group": "history", "name": {"ko": "정동·시청", "en": "Jeong-dong & City Hall"}, "description": {"ko": "덕수궁 주변 정동길 일대", "en": "Around Deoksugung and Jeongdong-gil"}},
+    {"id": 8, "group": "history", "name": {"ko": "종로", "en": "Jongno"}, "description": {"ko": "광화문에서 종로·대학로까지", "en": "From Gwanghwamun to Jongno and Daehak-ro"}},
+    {"id": 9, "group": "history", "name": {"ko": "서대문", "en": "Seodaemun"}, "description": {"ko": "독립문 일대", "en": "Around Independence Gate"}}
+  ],
+  "places": [
+    {
+      "id": 1,
+      "name": {"ko": "환구단", "en": "Hwangudan"},
+      "area": {"ko": "시청 · 대한제국", "en": "City Hall · Korean Empire"},
+      "address": "서울 중구 소공로 106",
+      "lat": 37.5652, "lng": 126.9800,
+      "category_ids": [3, 7],
+      "expected_visit_minutes": 20,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1897년 고종이 황제 즉위를 하늘에 알리며 제사를 지낸 곳입니다.", "en": "Where Emperor Gojong held a rite in 1897 to announce his enthronement."},
+      "highlights": {"ko": ["3층 팔각 지붕의 황궁우", "돌로 만든 북, 석고"], "en": ["Hwanggungu, the three-storey octagonal shrine", "The stone drums (seokgo)"]},
+      "audio": null,
+      "operating": {
+        "always_open": true,
+        "opening_hours": {"ko": "상시 개방 (임시)", "en": "Always open (temporary)"},
+        "last_admission": null,
+        "closed_days": {"ko": "없음", "en": "None"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 11, "content": "[임시 대본] 1897년 고종이 황제 즉위를 하늘에 알리며 제사를 지낸 곳입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 12, "content": "[Temporary script] Where Emperor Gojong held a rite in 1897 to announce his enthronement. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 2,
+      "name": {"ko": "광화문", "en": "Gwanghwamun"},
+      "area": {"ko": "종로 · 조선", "en": "Jongno · Joseon"},
+      "address": "서울 종로구 사직로 161",
+      "lat": 37.5760, "lng": 126.9769,
+      "category_ids": [1, 8],
+      "expected_visit_minutes": 20,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "경복궁의 정문으로, 조선의 중심 거리 육조거리를 마주합니다.", "en": "The main gate of Gyeongbokgung, facing the old main street of Joseon."},
+      "highlights": {"ko": ["세 개의 홍예문", "수문장 교대식"], "en": ["The three arched gateways", "The gate guard changing ceremony"]},
+      "audio": null,
+      "operating": {
+        "always_open": true,
+        "opening_hours": {"ko": "바깥은 상시 관람 (임시)", "en": "Outside always viewable (temporary)"},
+        "last_admission": null,
+        "closed_days": {"ko": "없음", "en": "None"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 21, "content": "[임시 대본] 경복궁의 정문으로, 조선의 중심 거리 육조거리를 마주합니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 22, "content": "[Temporary script] The main gate of Gyeongbokgung. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 3,
+      "name": {"ko": "우정총국", "en": "Ujeongchongguk (Post Office)"},
+      "area": {"ko": "종로 · 개화기", "en": "Jongno · Enlightenment era"},
+      "address": "서울 종로구 우정국로 59",
+      "lat": 37.5733, "lng": 126.9839,
+      "category_ids": [2, 5, 8],
+      "expected_visit_minutes": 20,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1884년 근대 우편 업무를 위해 세운 관청으로, 개국 축하연에서 갑신정변이 일어났습니다.", "en": "Korea's first modern post office (1884), where the Gapsin Coup began at its opening party."},
+      "highlights": {"ko": ["우편 역사 전시"], "en": ["Postal history exhibits"]},
+      "audio": null,
+      "operating": {
+        "always_open": false,
+        "open": "09:00", "close": "18:00", "closed_weekdays": [0],
+        "opening_hours": {"ko": "09:00~18:00 (임시)", "en": "09:00-18:00 (temporary)"},
+        "last_admission": "17:30",
+        "closed_days": {"ko": "매주 월요일 (임시)", "en": "Mondays (temporary)"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 31, "content": "[임시 대본] 1884년 근대 우편 업무를 위해 세운 관청입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 32, "content": "[Temporary script] Korea's first modern post office, opened in 1884. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 4,
+      "name": {"ko": "탑골공원 팔각정", "en": "Tapgol Park Palgakjeong"},
+      "area": {"ko": "종로 · 독립운동", "en": "Jongno · Independence movement"},
+      "address": "서울 종로구 종로 99",
+      "lat": 37.5711, "lng": 126.9882,
+      "category_ids": [4, 8],
+      "expected_visit_minutes": 20,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1919년 3월 1일 독립선언서를 낭독하며 만세 운동이 시작된 곳입니다.", "en": "Where the Declaration of Independence was read on 1 March 1919."},
+      "highlights": {"ko": ["팔각정", "원각사지 십층석탑"], "en": ["The octagonal pavilion", "The ten-storey stone pagoda of Wongaksa"]},
+      "audio": null,
+      "operating": {
+        "always_open": false,
+        "open": "09:00", "close": "18:00", "closed_weekdays": [],
+        "opening_hours": {"ko": "09:00~18:00 (임시)", "en": "09:00-18:00 (temporary)"},
+        "last_admission": null,
+        "closed_days": {"ko": "없음", "en": "None"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 41, "content": "[임시 대본] 1919년 3월 1일 독립선언서를 낭독한 곳입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 42, "content": "[Temporary script] Where the Declaration of Independence was read on 1 March 1919. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 5,
+      "name": {"ko": "대한의원", "en": "Daehan Uiwon"},
+      "area": {"ko": "대학로 · 대한제국", "en": "Daehak-ro · Korean Empire"},
+      "address": "서울 종로구 대학로 101",
+      "lat": 37.5797, "lng": 126.9990,
+      "category_ids": [3, 5, 8],
+      "expected_visit_minutes": 30,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "대한제국이 세운 근대식 국립병원으로, 1908년 완공한 시계탑 본관이 남아 있습니다.", "en": "A modern national hospital founded by the Korean Empire; its 1908 clock-tower building remains."},
+      "highlights": {"ko": ["시계탑", "의학 역사 전시"], "en": ["The clock tower", "Medical history exhibits"]},
+      "audio": null,
+      "operating": {
+        "always_open": false,
+        "open": "10:00", "close": "17:00", "closed_weekdays": [6],
+        "opening_hours": {"ko": "10:00~17:00 (임시)", "en": "10:00-17:00 (temporary)"},
+        "last_admission": "16:30",
+        "closed_days": {"ko": "매주 일요일 (임시)", "en": "Sundays (temporary)"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 51, "content": "[임시 대본] 대한제국이 세운 근대식 국립병원입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 52, "content": "[Temporary script] A modern national hospital founded by the Korean Empire. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 6,
+      "name": {"ko": "구 러시아공사관 터", "en": "Former Russian Legation"},
+      "area": {"ko": "정동 · 대한제국", "en": "Jeong-dong · Korean Empire"},
+      "address": "서울 중구 정동길 21-18",
+      "lat": 37.5684, "lng": 126.9713,
+      "category_ids": [3, 7],
+      "expected_visit_minutes": 15,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1896년 고종이 피신한 아관파천의 무대로, 지금은 탑 부분만 남아 있습니다.", "en": "Where King Gojong took refuge in 1896; only the tower remains today."},
+      "highlights": {"ko": ["하얀 탑", "정동길 언덕 풍경"], "en": ["The white tower", "The view over Jeongdong-gil"]},
+      "audio": null,
+      "operating": {
+        "always_open": true,
+        "opening_hours": {"ko": "바깥은 상시 관람 (임시)", "en": "Outside always viewable (temporary)"},
+        "last_admission": null,
+        "closed_days": {"ko": "없음", "en": "None"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 61, "content": "[임시 대본] 1896년 고종이 피신한 아관파천의 무대입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 62, "content": "[Temporary script] Where King Gojong took refuge in 1896. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 7,
+      "name": {"ko": "배재학당 역사박물관", "en": "Appenzeller-Noble Memorial Museum"},
+      "area": {"ko": "정동 · 개화기", "en": "Jeong-dong · Enlightenment era"},
+      "address": "서울 중구 서소문로11길 19",
+      "lat": 37.5655, "lng": 126.9733,
+      "category_ids": [2, 5, 6, 7],
+      "expected_visit_minutes": 30,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1885년 선교사 아펜젤러가 세운 근대 학교 배재학당의 동관을 박물관으로 쓰고 있습니다.", "en": "The east hall of Paichai Hakdang, a modern school founded by missionary Appenzeller in 1885."},
+      "highlights": {"ko": ["옛 교실 재현", "붉은 벽돌 동관"], "en": ["The recreated classroom", "The red-brick east hall"]},
+      "audio": null,
+      "operating": {
+        "always_open": false,
+        "open": "10:00", "close": "17:00", "closed_weekdays": [0],
+        "opening_hours": {"ko": "10:00~17:00 (임시)", "en": "10:00-17:00 (temporary)"},
+        "last_admission": "16:30",
+        "closed_days": {"ko": "매주 월요일 (임시)", "en": "Mondays (temporary)"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 71, "content": "[임시 대본] 1885년 아펜젤러가 세운 배재학당의 동관입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 72, "content": "[Temporary script] The east hall of Paichai Hakdang, founded in 1885. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 8,
+      "name": {"ko": "딜쿠샤", "en": "Dilkusha"},
+      "area": {"ko": "행촌동 · 독립운동", "en": "Haengchon-dong · Independence movement"},
+      "address": "서울 종로구 사직로2길 17",
+      "lat": 37.5738, "lng": 126.9655,
+      "category_ids": [4, 5, 8],
+      "expected_visit_minutes": 40,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "3·1운동 소식을 세계에 알린 미국인 기자 앨버트 테일러가 살던 집입니다.", "en": "The home of Albert Taylor, the American journalist who told the world about the March 1st Movement."},
+      "highlights": {"ko": ["복원한 거실", "집 앞 은행나무"], "en": ["The restored living room", "The ginkgo tree in front"]},
+      "audio": null,
+      "operating": {
+        "always_open": false,
+        "open": "09:00", "close": "18:00", "closed_weekdays": [0],
+        "opening_hours": {"ko": "09:00~18:00 (임시)", "en": "09:00-18:00 (temporary)"},
+        "last_admission": "17:00",
+        "closed_days": {"ko": "매주 월요일 (임시)", "en": "Mondays (temporary)"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "사전 예약 권장 (임시)", "en": "Booking recommended (temporary)"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 81, "content": "[임시 대본] 앨버트 테일러가 살던 집 딜쿠샤입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 82, "content": "[Temporary script] Dilkusha, the home of Albert Taylor. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 9,
+      "name": {"ko": "독립문", "en": "Independence Gate"},
+      "area": {"ko": "서대문 · 개화기", "en": "Seodaemun · Enlightenment era"},
+      "address": "서울 서대문구 통일로 247",
+      "lat": 37.5723, "lng": 126.9596,
+      "category_ids": [2, 9],
+      "expected_visit_minutes": 15,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1897년 독립협회가 자주독립의 뜻을 담아 세운 문입니다.", "en": "A gate built in 1897 by the Independence Club as a symbol of sovereignty."},
+      "highlights": {"ko": ["앞에 남은 영은문 주초", "한글·한자 현판"], "en": ["The remaining pillars of Yeongeunmun", "The Hangeul and Hanja name plaques"]},
+      "audio": null,
+      "operating": {
+        "always_open": true,
+        "opening_hours": {"ko": "상시 개방 (임시)", "en": "Always open (temporary)"},
+        "last_admission": null,
+        "closed_days": {"ko": "없음", "en": "None"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 91, "content": "[임시 대본] 1897년 독립협회가 세운 독립문입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 92, "content": "[Temporary script] Independence Gate, built in 1897. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    },
+    {
+      "id": 10,
+      "name": {"ko": "구세군 중앙회관", "en": "Salvation Army Central Hall"},
+      "area": {"ko": "정동 · 근대 건축", "en": "Jeong-dong · Modern architecture"},
+      "address": "서울 중구 덕수궁길 130",
+      "lat": 37.5671, "lng": 126.9745,
+      "category_ids": [5, 6, 7],
+      "expected_visit_minutes": 20,
+      "thumbnail_url": null,
+      "images": [],
+      "summary": {"ko": "1928년 지은 구세군 본부 건물로, 지금은 구세군역사박물관입니다.", "en": "The Salvation Army headquarters built in 1928, now its history museum."},
+      "highlights": {"ko": ["좌우 대칭 정면과 기둥"], "en": ["The symmetrical facade and columns"]},
+      "audio": null,
+      "operating": {
+        "always_open": false,
+        "open": "10:00", "close": "17:00", "closed_weekdays": [6],
+        "opening_hours": {"ko": "10:00~17:00 (임시)", "en": "10:00-17:00 (temporary)"},
+        "last_admission": "16:30",
+        "closed_days": {"ko": "매주 일요일 (임시)", "en": "Sundays (temporary)"},
+        "admission_fee": {"ko": "무료", "en": "Free"},
+        "reservation": {"ko": "필요 없음", "en": "Not required"},
+        "source_url": null
+      },
+      "scripts": {
+        "ko": {"script_id": 101, "content": "[임시 대본] 1928년 지은 구세군 본부 건물입니다. 오디 대본을 받으면 바꿉니다.", "audio_url": null, "duration_seconds": null},
+        "en": {"script_id": 102, "content": "[Temporary script] The Salvation Army headquarters built in 1928. To be replaced with the Odii script.", "audio_url": null, "duration_seconds": null}
+      }
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "group": "history",
+      "category_ids": [2, 3, 4],
+      "title": {"ko": "한국 근대의 첫 장면들: 대한제국에서 3.1운동까지", "en": "First scenes of modern Korea: from the Korean Empire to the March 1st Movement"},
+      "subtitle": {"ko": "환구단에서 대한의원까지", "en": "From Hwangudan to Daehan Uiwon"},
+      "description": {"ko": "대한제국 선포부터 근대 우편, 3·1운동, 근대 병원까지 걸으며 만나는 코스 (임시 문구)", "en": "Walk from the proclamation of the Empire to modern post, the March 1st Movement and a modern hospital (temporary text)"},
+      "thumbnail_url": null,
+      "place_ids": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": 2,
+      "group": "history",
+      "category_ids": [2, 3, 4, 7],
+      "title": {"ko": "서울에 남은 외국인의 집과 흔적", "en": "Homes and traces of foreigners in Seoul"},
+      "subtitle": {"ko": "정동에서 행촌동, 독립문까지", "en": "From Jeong-dong to Haengchon-dong and Independence Gate"},
+      "description": {"ko": "공사관, 선교사가 세운 학교, 외국인 기자의 집을 따라 걷는 코스 (임시 문구)", "en": "Walk past a legation, a missionary school and a foreign journalist's home (temporary text)"},
+      "thumbnail_url": null,
+      "place_ids": [6, 7, 8, 9, 10]
+    }
+  ]
+}

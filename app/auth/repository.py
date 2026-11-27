@@ -1,8 +1,10 @@
-"""회원 저장소 (임시: 메모리).
+"""회원 데이터 읽기·쓰기 (repository 층, 임시: 메모리).
 
 DB가 준비되기 전까지 회원, 동의 기록, 리프레시 토큰을 메모리에 둔다.
-서버를 다시 켜면 모두 사라진다. DB를 붙일 때는 이 파일의 UserStore를 DB 버전으로 바꾸면 되고,
-라우터는 그대로 둔다 (users, user_consents, refresh_tokens 테이블).
+서버를 다시 켜면 모두 사라진다. DB를 붙일 때는 이 파일의 UserRepository를 DB 버전으로 바꾸면 되고,
+service와 router는 그대로 둔다 (users, user_consents, refresh_tokens 테이블).
+
+이 층의 규칙: 저장하고 꺼내기만 한다. 가입 조건, 토큰 발급 같은 판단은 service.py가 한다.
 """
 
 import threading
@@ -27,7 +29,7 @@ class User:
     consents_updated_at: datetime | None = None
 
 
-class UserStore:
+class UserRepository:
     def __init__(self) -> None:
         self._lock = threading.Lock()
         self._users: dict[int, User] = {}
@@ -120,8 +122,9 @@ class UserStore:
             self._refresh_tokens.pop(jti, None)
 
 
-_store = UserStore()
+_repository = UserRepository()
 
 
-def get_user_store() -> UserStore:
-    return _store
+def get_user_repository() -> UserRepository:
+    """서버 전체가 함께 쓰는 저장소 하나. 테스트에서는 dependency_overrides로 새것을 끼운다."""
+    return _repository

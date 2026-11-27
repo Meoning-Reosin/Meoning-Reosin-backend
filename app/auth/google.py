@@ -8,13 +8,15 @@
 """
 
 from dataclasses import dataclass
+from typing import Annotated
 from urllib.parse import urlencode
 
 import httpx
 import jwt
+from fastapi import Depends
 from fastapi.concurrency import run_in_threadpool
 
-from app.core.config import Settings
+from app.core.config import Settings, get_settings
 
 AUTHORIZATION_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth"
 TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token"
@@ -110,3 +112,8 @@ def _jwks_client() -> jwt.PyJWKClient:
     if _jwks is None:
         _jwks = jwt.PyJWKClient(JWKS_URI, cache_keys=True, timeout=10)
     return _jwks
+
+
+def get_google_client(settings: Annotated[Settings, Depends(get_settings)]) -> GoogleOAuthClient:
+    """라우터에서 Depends로 받아 쓰는 Google 클라이언트. 테스트에서는 가짜(FakeGoogle)로 바꿔 끼운다."""
+    return GoogleOAuthClient(settings)

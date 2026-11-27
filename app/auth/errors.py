@@ -1,14 +1,11 @@
 """회원 기능 오류 코드와 언어별 메시지.
 
-응답 형식은 사진 인식과 같다: {"detail": {"code": "...", "message": "..."}}
+쓰는 법: raise AppError("코드"). 응답 모양과 언어 고르기는 app/core/errors.py가 맡는다.
 """
 
-from typing import Annotated
+from fastapi import status
 
-from fastapi import Header, HTTPException, status
-
-SUPPORTED_LANGUAGES = ("ko", "en")
-DEFAULT_LANGUAGE = "ko"
+from app.core.errors import register_errors
 
 _ERRORS = {
     "GOOGLE_NOT_CONFIGURED": (
@@ -52,26 +49,4 @@ _ERRORS = {
     ),
 }
 
-
-def resolve_language(accept_language: str | None) -> str:
-    """Accept-Language 헤더(예: "en-US,en;q=0.9")에서 지원하는 첫 언어를 고른다."""
-    if accept_language:
-        for part in accept_language.split(","):
-            code = part.split(";")[0].strip().lower()[:2]
-            if code in SUPPORTED_LANGUAGES:
-                return code
-    return DEFAULT_LANGUAGE
-
-
-def get_language(accept_language: Annotated[str | None, Header()] = None) -> str:
-    return resolve_language(accept_language)
-
-
-def auth_error(code: str, lang: str = DEFAULT_LANGUAGE) -> HTTPException:
-    status_code, messages = _ERRORS[code]
-    headers = {"WWW-Authenticate": "Bearer"} if status_code == status.HTTP_401_UNAUTHORIZED else None
-    return HTTPException(
-        status_code=status_code,
-        detail={"code": code, "message": messages.get(lang, messages[DEFAULT_LANGUAGE])},
-        headers=headers,
-    )
+register_errors(_ERRORS)

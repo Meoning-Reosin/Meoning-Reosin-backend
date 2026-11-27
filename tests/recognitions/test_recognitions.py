@@ -2,8 +2,9 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.recognitions import config, service
-from app.recognitions.errors import resolve_language
+from app.core.errors import resolve_language
+from app.recognitions import client as recognition_client
+from app.recognitions import config
 from app.recognitions.image_type import detect_image_type
 
 client = TestClient(app)
@@ -48,7 +49,7 @@ def test_matched():
 
 
 def test_not_matched_when_low_confidence(monkeypatch):
-    monkeypatch.setattr(service, "predict", lambda image, lat, lng: service.Prediction(3, 0.2))
+    monkeypatch.setattr(recognition_client, "predict", lambda image, lat, lng: recognition_client.Prediction(3, 0.2))
     res = upload()
     assert res.status_code == 200
     assert res.json() == {"status": "not_matched", "place_id": None, "confidence": 0.2}
@@ -65,9 +66,9 @@ def test_location_is_passed_to_predict(monkeypatch):
 
     def fake_predict(image, lat, lng):
         received.update(lat=lat, lng=lng)
-        return service.Prediction(1, 0.9)
+        return recognition_client.Prediction(1, 0.9)
 
-    monkeypatch.setattr(service, "predict", fake_predict)
+    monkeypatch.setattr(recognition_client, "predict", fake_predict)
     res = upload(data={"lat": "37.5658", "lng": "126.9751"})
     assert res.status_code == 200
     assert received == {"lat": 37.5658, "lng": 126.9751}
