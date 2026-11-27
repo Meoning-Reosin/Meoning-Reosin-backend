@@ -3,13 +3,25 @@
 annotated-doc==0.0.5
 annotated-types==0.7.0
 anyio==4.12.1
+certifi==2026.11.20
+cffi==2.1.1
 click==8.1.8
+cryptography==50.0.2
 exceptiongroup==1.3.2
 fastapi==0.128.8
 h11==0.16.0
+httpcore==1.0.9
+# Google과 통신 (로그인 코드 교환)
+httpx==0.28.1
 idna==3.20
+pycparser==3.12
 pydantic==2.13.5
+# .env 파일에서 설정 읽기
+pydantic-settings==2.16.3
 pydantic_core==2.46.5
+# JWT 토큰 만들기·확인, Google ID 토큰 서명 확인 ([crypto]는 RS256 검증에 필요)
+PyJWT[crypto]==2.15.1
+python-dotenv==1.2.4
 python-multipart==0.0.22
 starlette==0.49.3
 typing-inspection==0.4.2
