@@ -111,6 +111,18 @@ class PlaceService:
             categories=self._category_briefs(place, lang),
         )
 
+    def place_cards(self, place_ids: list[int], *, lang: str, user_id: int | None) -> list[schemas.PlaceCard]:
+        """장소 번호 순서 그대로 장소 카드를 만든다. 다른 기능(찜 목록 등)이 같은 카드 모양을 쓸 때 부른다.
+
+        없는 장소 번호는 건너뛴다 (예: 찜한 뒤 장소 데이터에서 빠진 경우).
+        """
+        places = [p for pid in place_ids if (p := self.repo.get_place(pid)) is not None]
+        return [self._card(p, lang, user_id, None, None) for p in places]
+
+    def ensure_place_exists(self, place_id: int) -> None:
+        """없는 장소면 PLACE_NOT_FOUND."""
+        self._get_place(place_id)
+
     # ------------------------------------------------------------------
     # 12. 장소 상세
     # ------------------------------------------------------------------

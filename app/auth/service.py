@@ -10,6 +10,7 @@
 """
 
 import secrets
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from datetime import timedelta
 
@@ -39,9 +40,19 @@ class CallbackResult:
 
 
 class AuthService:
-    def __init__(self, settings: Settings, repo: UserRepository) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        repo: UserRepository,
+        on_account_deleted: Sequence[Callable[[int], None]] = (),
+    ) -> None:
+        """on_account_deleted: 탈퇴할 때 부를 함수 목록. 각 함수는 회원 번호를 받아 그 회원의 데이터를 지운다.
+
+        회원 기능이 찜·일정 기능을 직접 알지 않도록, 지우는 방법은 바깥(router)에서 넣어 준다.
+        """
         self.settings = settings
         self.repo = repo
+        self.on_account_deleted = on_account_deleted
 
     # ------------------------------------------------------------------ Google 로그인
     def start_google_login(self, google: GoogleOAuthClient) -> tuple[str, str]:
@@ -171,10 +182,12 @@ class AuthService:
         return self.repo.update_consents(user.id, changes) or user
 
     def delete_account(self, user: User) -> None:
-        """회원 탈퇴 (API 40). 회원 정보와 토큰을 바로 지운다.
+        """회원 탈퇴 (API 40). 다른 기능의 데이터(찜 등)를 먼저 지우고, 회원 정보와 토큰을 지운다.
 
-        TODO: 일정·찜·공개 코스가 생기면 여기서 함께 지운다 (Q-33).
+        TODO: 일정·공개 코스가 생기면 auth/router.py의 get_auth_service에 지우는 함수를 추가한다 (Q-33).
         """
+        for delete_user_data in self.on_account_deleted:
+            delete_user_data(user.id)
         self.repo.delete(user.id)
 
 

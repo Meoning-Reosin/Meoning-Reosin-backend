@@ -13,6 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.auth.router import router as auth_router
 from app.auth.router import users_router
+from app.bookmarks.router import router as bookmarks_router
 from app.core.config import get_settings
 from app.core.errors import AppError, app_error_handler
 from app.places.router import categories_router, courses_router, places_router
@@ -40,6 +41,7 @@ app.include_router(recognitions_router)  # 사진 인식
 app.include_router(places_router)  # 관광지
 app.include_router(categories_router)  # 카테고리
 app.include_router(courses_router)  # 추천 코스
+app.include_router(bookmarks_router)  # 찜
 
 
 @app.get("/health")
