@@ -39,6 +39,8 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 서버를 켜고 http://127.0.0.1:8000/docs 에서 아래를 실행해 봅니다. 데이터는 `app/places/data/places.json`의 임시 데이터(A/B 코스 10곳)입니다.
 
+장소 대표 사진은 `app/places/data/images/{장소 번호}.jpg`에 있고, http://127.0.0.1:8000/api/v1/media/places/1.jpg 처럼 열립니다. Azure Blob Storage가 생기면 사진을 그쪽으로 옮기고 `places.json`의 주소만 바꿉니다.
+
 - `GET /api/v1/places`: 관광지 목록. `lat`, `lng`를 보내면 가까운 순, `q=환구`로 검색
 - `GET /api/v1/places/1`: 장소 상세. 헤더 `Accept-Language: en`이면 영어
 - `GET /api/v1/places/1/operating-info`, `/script`: 운영 정보, 해설 대본

@@ -192,8 +192,28 @@ def test_place_detail_in_english(env):
     assert body["name"] == "Dilkusha" and body["name_en"] == "Dilkusha"
     assert body["introduction"]["summary"] == body["introduction"]["summary_en"]
     assert body["introduction"]["highlights"]
-    assert body["audio"] is None and body["images"] == []
+    assert body["audio"] is None
+    assert [image["url"] for image in body["images"]] == ["/api/v1/media/places/8.jpg"]
     assert body["bookmark_count"] == 0 and body["is_bookmarked"] is False
+
+
+# ---------------------------------------------------------------- 사진 (임시 정적 파일)
+
+
+def test_every_place_and_course_has_a_photo_file(env):
+    """모든 장소·코스의 대표 사진 주소가 실제 파일로 열리는지 (파일 이름 실수 잡기)."""
+    places = env.client.get(PLACES, params={"size": 100}).json()["items"]
+    courses = env.client.get("/api/v1/courses").json()["items"]
+    urls = [p["thumbnail_url"] for p in places] + [c["thumbnail_url"] for c in courses]
+    assert len(places) == 10 and all(urls)
+    for url in set(urls):
+        response = env.client.get(url)
+        assert response.status_code == 200, url
+        assert response.headers["content-type"] == "image/jpeg"
+
+
+def test_unknown_photo_is_404(env):
+    assert env.client.get("/api/v1/media/places/999.jpg").status_code == 404
 
 
 def test_unknown_place_is_404(env):
