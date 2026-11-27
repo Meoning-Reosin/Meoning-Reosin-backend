@@ -22,10 +22,12 @@ from app.core.config import Settings
 
 logger = logging.getLogger(__name__)
 
-ACCESS_COOKIE = "sw_access"
-REFRESH_COOKIE = "sw_refresh"
-SIGNUP_COOKIE = "sw_signup"
-STATE_COOKIE = "sw_oauth_state"
+# 쿠키 이름 앞의 wcc_는 서비스 이름 워크크(Walk Creator Crew)의 약자. 같은 주소(127.0.0.1)에서 도는
+# 다른 앱의 쿠키와 이름이 겹치지 않게 붙인다. 프론트 코드는 HttpOnly라 이 쿠키를 읽을 수 없고, 읽을 필요도 없다.
+ACCESS_COOKIE = "wcc_access"
+REFRESH_COOKIE = "wcc_refresh"
+SIGNUP_COOKIE = "wcc_signup"
+STATE_COOKIE = "wcc_oauth_state"
 
 # 쿠키를 보낼 주소 범위. refresh·signup은 인증 API에만 보내 노출을 줄인다.
 ACCESS_COOKIE_PATH = "/"
