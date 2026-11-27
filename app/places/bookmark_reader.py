@@ -1,11 +1,15 @@
 """관광지 화면에 필요한 찜 정보(찜 수, 내가 찜했는지)를 읽는 창구.
 
-찜 기능(bookmarks 패키지)은 아직 없다. 그래서 지금은 "찜 0개, 찜 안 함"을 돌려주는 빈 버전을 쓴다.
-bookmarks 패키지를 만들 때 get_bookmark_reader가 진짜 찜 저장소를 돌려주게 바꾸면
-관광지 코드는 고칠 필요가 없다.
+관광지 기능은 찜이 어떻게 저장되는지 모르고, 이 창구(BookmarkReader)로 두 가지만 묻는다.
+실제로는 찜 저장소(app/bookmarks/repository.py)가 이 창구 역할을 한다.
+테스트에서는 get_bookmark_reader를 가짜로 바꿔 끼워 찜 수를 마음대로 정할 수 있다.
 """
 
-from typing import Protocol
+from typing import Annotated, Protocol
+
+from fastapi import Depends
+
+from app.bookmarks.repository import BookmarkRepository, get_bookmark_repository
 
 
 class BookmarkReader(Protocol):
@@ -19,7 +23,7 @@ class BookmarkReader(Protocol):
 
 
 class EmptyBookmarkReader:
-    """찜 기능이 생기기 전까지 쓰는 빈 버전."""
+    """찜이 하나도 없는 창구. 테스트처럼 찜과 상관없이 관광지만 볼 때 쓴다."""
 
     def count(self, place_id: int) -> int:
         return 0
@@ -28,9 +32,7 @@ class EmptyBookmarkReader:
         return False
 
 
-_empty = EmptyBookmarkReader()
-
-
-def get_bookmark_reader() -> BookmarkReader:
-    # TODO(bookmarks 패키지): 찜 저장소를 돌려주게 바꾼다.
-    return _empty
+def get_bookmark_reader(
+    bookmarks: Annotated[BookmarkRepository, Depends(get_bookmark_repository)],
+) -> BookmarkReader:
+    return bookmarks

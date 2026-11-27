@@ -29,6 +29,7 @@ from app.auth.schemas import (
     UserResponse,
 )
 from app.auth.service import AuthService, LoginTokens, to_consents_response, to_user_response
+from app.bookmarks.repository import BookmarkRepository, get_bookmark_repository
 from app.core.config import Settings, get_settings
 from app.core.deps import CurrentUser
 from app.core.errors import AppError, error_response, get_language
@@ -53,8 +54,10 @@ users_router = APIRouter(prefix="/api/v1/users", tags=["users"])  # 내 정보
 def get_auth_service(
     settings: Annotated[Settings, Depends(get_settings)],
     repo: Annotated[UserRepository, Depends(get_user_repository)],
+    bookmarks: Annotated[BookmarkRepository, Depends(get_bookmark_repository)],
 ) -> AuthService:
-    return AuthService(settings, repo)
+    # 탈퇴할 때 함께 지울 다른 기능의 데이터. 일정·공개 코스를 만들면 여기에 추가한다.
+    return AuthService(settings, repo, on_account_deleted=[bookmarks.delete_user])
 
 
 # 자주 쓰는 의존성을 짧은 이름으로 묶어 둔다.
