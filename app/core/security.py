@@ -130,7 +130,17 @@ def clear_state_cookie(response: Response, settings: Settings) -> None:
     _delete_cookie(response, settings, STATE_COOKIE, STATE_COOKIE_PATH)
 
 
-def clear_auth_cookies(response: Response, settings: Settings) -> None:
+def clear_login_cookies(response: Response, settings: Settings) -> None:
+    """로그인 쿠키(access, refresh)만 지운다. 가입 쿠키는 그대로 둔다.
+
+    토큰 다시 받기(refresh)가 실패했을 때 쓴다. 가입 중인 사람은 아직 로그인 쿠키가 없어서
+    프론트의 로그인 확인 → refresh 가 실패하는데, 이때 가입 쿠키까지 지우면 가입을 마칠 수 없다.
+    """
     _delete_cookie(response, settings, ACCESS_COOKIE, ACCESS_COOKIE_PATH)
     _delete_cookie(response, settings, REFRESH_COOKIE, AUTH_COOKIE_PATH)
+
+
+def clear_auth_cookies(response: Response, settings: Settings) -> None:
+    """로그인 쿠키와 가입 쿠키를 모두 지운다 (로그아웃, 탈퇴)."""
+    clear_login_cookies(response, settings)
     clear_signup_cookie(response, settings)
