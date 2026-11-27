@@ -9,7 +9,7 @@
     @router.get("/places")
     def places(user: OptionalUser): ...            # 로그인 선택. 비회원이면 user는 None
 
-토큰은 sw_access 쿠키에서 먼저 찾고, 없으면 Authorization: Bearer 헤더에서 찾는다.
+토큰은 wcc_access 쿠키에서 먼저 찾고, 없으면 Authorization: Bearer 헤더에서 찾는다.
 (헤더는 /docs에서 직접 시험하거나 나중에 앱을 만들 때 쓸 수 있게 열어 둔다.)
 """
 

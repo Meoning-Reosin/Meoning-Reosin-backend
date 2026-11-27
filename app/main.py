@@ -20,7 +20,7 @@ from app.itineraries.router import router as itineraries_router
 from app.places.router import categories_router, courses_router, places_router
 from app.recognitions.router import router as recognitions_router
 
-app = FastAPI(title="서울 스토리워크 API")
+app = FastAPI(title="워크크 API")
 
 app.add_exception_handler(AppError, app_error_handler)
 

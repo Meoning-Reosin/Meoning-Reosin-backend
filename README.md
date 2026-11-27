@@ -1,4 +1,14 @@
-# Meoning-Reosion-backend
+# 워크크(Walk Creator Crew) 백엔드
+
+워크크 서비스의 FastAPI 백엔드입니다. 프론트(React)는 [Meoning-Reosin-frontend](https://github.com/Meoning-Reosin/Meoning-Reosin-frontend) 저장소에 따로 있습니다.
+
+권장 폴더 구조: 두 저장소를 한 폴더 아래 나란히 둡니다.
+
+```
+~/wcc/
+  backend/    이 저장소 (Meoning-Reosin-backend)
+  frontend/   프론트 저장소 (Meoning-Reosin-frontend)
+```
 
 Python 3.12를 사용합니다. 저장소를 클론한 뒤 프로젝트 폴더에서 실행합니다.
 
@@ -12,7 +22,8 @@ python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 
 - 서버 상태 확인은 http://127.0.0.1:8000/health 에서 합니다. `{"status":"ok"}`가 나오면 성공입니다.
 - API 문서는 http://127.0.0.1:8000/docs 에서 확인할 수 있습니다.
-- 주소는 `localhost`가 아니라 **`127.0.0.1`** 로 여세요. Google 로그인 리디렉션 주소가 127.0.0.1로 등록돼 있어서, localhost로 열면 로그인 쿠키가 전달되지 않습니다.
+- 주소는 `localhost`가 아니라 **`127.0.0.1`** 로 여세요. Google 로그인 리디렉션 주소가 127.0.0.1로 등록돼 있어서, localhost로 열면 로그인 쿠키가 전달되지 않습니다. 프론트 개발 서버도 `http://127.0.0.1:5173`으로 엽니다.
+- 폴더를 옮기거나 이름을 바꾸면 `.venv`가 동작하지 않습니다. `.venv`를 지우고 위 명령으로 다시 만드세요.
 
 ## Google 로그인 확인 (프론트 없이)
 
